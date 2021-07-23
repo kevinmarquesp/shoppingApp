@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lan="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            Lista de compras
+        </title>
+
+        <link rel="stylesheet" href="./style.css" media="all">
+
+    </head>
+    <body>
+
+        <div id="add_edit_pane" class="pane">
+            <div class="content">
+                <div class="header">
+                    <div>
+                        <input id="input_name" type="text" placeholder="Nome do produto">
+                    </div>
+                    <div>
+                        <input id="input_price" type="number" placeholder="Preço do produto">
+                    </div>
+                    <div>
+                        <input id="input_amount" type="number" placeholder="Quantidade de itens">
+                    </div>
+                </div>
+                <div class="footer">
+                    <button id="addedit_cancel">Cancelar</button>
+                    <button id="addedit_confirm">Ok</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <input id="check_opitions" type="checkbox">
+            <ul id="opitions_section" onclick="closeDock()">
+                <li>Adicionar novo</li>
+                <li>Limpar lista</li>
+            </ul>
+            <label for="check_opitions" id="open_opitions">
+                &plus;
+            </label>
+        </footer>
+        
+        <script src="./script.js"></script>
+    </body>
+</html>

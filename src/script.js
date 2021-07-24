@@ -7,29 +7,13 @@ class Item {
         this.curPrice = ( price/100 ).toLocaleString( "pt-br", { style:"currency", currency:"BRL" } );
 
         this.numTotal = price * amount;
-        this.numTotal = ( price * amount / 100 ).toLocaleString( "pt-br", { style:"currency", currency:"BRL" } );
+        this.curTotal = ( this.numTotal / 100 ).toLocaleString( "pt-br", { style:"currency", currency:"BRL" } );
     }
 }
 
 
 
 
-
-// Elementos da página
-const addEdditPane = document.querySelector( "div#add_edit_pane" );
-addEdditPane.style.display = "none";
-
-
-const inputName = document.querySelector( "input#input_name" );
-const inputPrice = document.querySelector( "input#input_price" );
-const inputAmount = document.querySelector( "input#input_amount" );
-
-
-const footer = document.querySelector( "footer" );
-const checkBox = document.querySelector( "input#check_opitions" );
-
-const opitionsList = document.querySelector( "ul#opitions_section" );
-const openOpitionsButtom = document.querySelector( "label#open_opitions" );
 
 // Array com a lista
 let listArr;
@@ -44,6 +28,36 @@ if ( getlocalStorage == null ) {
     listArr = JSON.parse( getlocalStorage );
     
 }
+
+
+
+// Elementos da página
+const addEdditPane = document.querySelector( "div#add_edit_pane" );
+addEdditPane.style.display = "none";
+
+
+const inputName = document.querySelector( "input#input_name" );
+const inputPrice = document.querySelector( "input#input_price" );
+const inputAmount = document.querySelector( "input#input_amount" );
+
+
+const main = document.querySelector( "main" );
+const header = document.querySelector( "header" );
+const listDiv = document.querySelector( "div#list_div" );
+const mainList = document.querySelector( "ul#main_list" );
+
+const totalProductsData = document.querySelector( "span#total_products" );
+const totalPriceData = document.querySelector( "span#total_price" );
+const totalItemsData = document.querySelector( "span#total_items" );
+
+loadList();
+
+
+const footer = document.querySelector( "footer" );
+const checkBox = document.querySelector( "input#check_opitions" );
+
+const opitionsList = document.querySelector( "ul#opitions_section" );
+const openOpitionsButtom = document.querySelector( "label#open_opitions" );
 
 
 
@@ -80,6 +94,7 @@ opitionsList.onclick = () => {
 
 
 function openAddEditPane () { addEdditPane.style.display = ""; }
+
 function closeAddEditPane ( readInputs ) {
 
 
@@ -94,6 +109,11 @@ function closeAddEditPane ( readInputs ) {
                 verify[1],
                 verify[2]
             ) );
+
+            // Salva as alterações no armazenamento local
+            localStorage.setItem( "shopping", JSON.stringify( listArr ) );
+
+            loadList();
 
         }
 
@@ -130,3 +150,69 @@ function verifyInputs () {
     return [ name, price, amount ];
 
 }
+
+function clearList () {
+
+    listArr = [];
+    localStorage.setItem( "shopping", JSON.stringify( listArr ) );
+    loadList();
+
+}
+
+
+
+
+
+function loadList () {
+
+    mainList.innerHTML = "";
+
+    if ( listArr.length == 0 ) {
+
+        header.style.display = "block";
+        listDiv.style.display = "none";
+
+    } else {
+
+        let produtcs = listArr.length;
+        let total = 0;
+        let items = 0;
+
+        header.style.display = "none";
+        listDiv.style.display = "block";
+
+
+        listArr.forEach( e => {
+
+            let itemTag = `<li>
+                <div class="content">
+                    <div>
+                        <span class="product_name">${ e.name } -</span>
+                        <span class="product_price">${ e.curPrice }</span>
+                        <span class="product_amount">(${ e.amount })</span>
+                    </div>
+                    <div>
+                        <span class="product_total">${ e.curTotal }</span>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="remove_item">Remover</button>
+                    <button class="edit_item">Editar</button>
+                </div>
+            </li>`
+
+            total += e.numTotal;
+            items += Number( e.amount );
+            mainList.innerHTML += itemTag;
+
+        } );
+
+        totalProductsData.innerText = produtcs;
+        totalPriceData.innerHTML = ( total / 100 ).toLocaleString( "pt-br", { style:"currency", currency:"BRL" } );
+        totalItemsData.innerHTML = items;
+
+
+    }
+
+}
+

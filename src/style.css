@@ -21,9 +21,62 @@ input, button {
 
 
 body {
-    background-color: var(--light-gray2);
+    background-color: var(--gray2);
     width: 100%; height: 100%;
     font-family: sans-serif;
+}
+
+
+
+
+
+/* Paineis com inputs */
+div.pane {
+    position: fixed;
+    left: 0; top: 0;
+
+    width: 100%; height: 100%;
+    background-color: #000000e0;
+    z-index: +1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: none; */
+}
+
+div.pane div.content {
+    background-color: var(--gray1);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+div.pane div.content div.footer {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+div.pane div.content div.footer button {
+    background: none;
+    border: none;
+    width: 70px;
+
+    color: var(--red);
+    font-weight: bolder;
+}
+
+/* Painel para adicionar/editar um item */
+div#add_edit_pane div.content div.header div {
+    border-bottom: 2px solid var(--red);
+    padding: 10px 1rem;
+}
+
+div#add_edit_pane div.content div.header div input {
+    background: none;
+    border: none;
+
+    width: 65vw;
+    color: white;
 }
 
 

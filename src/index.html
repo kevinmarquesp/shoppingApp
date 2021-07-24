@@ -27,8 +27,8 @@
                     </div>
                 </div>
                 <div class="footer">
-                    <button id="addedit_cancel">Cancelar</button>
-                    <button id="addedit_confirm">Ok</button>
+                    <button id="addedit_cancel" onclick="closeAddEditPane(0)">Cancelar</button>
+                    <button id="addedit_confirm" onclick="closeAddEditPane(1)">Ok</button>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
         <footer>
             <input id="check_opitions" type="checkbox">
             <ul id="opitions_section" onclick="closeDock()">
-                <li>Adicionar novo</li>
+                <li onclick="openAddEditPane()">Adicionar novo</li>
                 <li>Limpar lista</li>
             </ul>
             <label for="check_opitions" id="open_opitions">

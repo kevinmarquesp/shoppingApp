@@ -1,4 +1,7 @@
 // Elementos da página
+const addEdditPane = document.querySelector( "div#add_edit_pane" );
+addEdditPane.style.display = "none";
+
 const footer = document.querySelector( "footer" );
 const checkBox = document.querySelector( "input#check_opitions" );
 
@@ -12,7 +15,7 @@ const openOpitionsButtom = document.querySelector( "label#open_opitions" );
 // Abre/fecha a dock com as opções
 checkBox.addEventListener( "click", () => {
 
-    if( checkBox.checked ) {        // As opções devem estar abertas
+    if ( checkBox.checked ) {        // As opções devem estar abertas
 
         openOpitionsButtom.style.transform = "rotate( 45deg )";
         footer.style.right = "0";
@@ -34,3 +37,21 @@ opitionsList.onclick = () => {
     checkBox.dispatchEvent( clickEvent );
     
 }
+
+
+
+
+
+function openAddEditPane () { addEdditPane.style.display = ""; }
+function closeAddEditPane ( readInputs ) {
+
+    addEdditPane.style.display = "none";
+
+    if ( readInputs ) {
+
+        alert( "Ler os inputs e registrar no armazenamento do navegador." )
+
+    }
+
+}
+

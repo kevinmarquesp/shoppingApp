@@ -13,6 +13,7 @@
     </head>
     <body>
 
+        <!-- Painel para editar/adicionar um novo item -->
         <div id="add_edit_pane" class="pane">
             <div class="content">
                 <div class="header">
@@ -33,6 +34,48 @@
             </div>
         </div>
 
+        <main>
+            <header>
+                <span>Nada adicionado ainda</span>
+                <p>Clique no botão abaixo para exibir as opções...</p>
+            </header>
+            <div>
+                <ul id="main_list">
+                    <li>
+                        <div class="content">
+                            <div>
+                                <span class="product_name">Arroz -</span>
+                                <span class="product_price">R$ 20,00</span>
+                                <span class="product_amount">(1)</span>
+                            </div>
+                            <div>
+                                <span class="product_total">R$ 20,00</span>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button class="remove_item">Remover</button>
+                            <button class="edit_item">Editar</button>
+                        </div>
+                    </li>
+                </ul>
+                <div id="final_data">
+                    <div>
+                        <span class="title">Produtos:</span>
+                        <span id="total_products">1</span>
+                    </div>
+                    <div class="big">
+                        <span class="title">Total:</span>
+                        <span id="total_price">R$ 20,00</span>
+                    </div>
+                    <div>
+                        <span class="title">Itens:</span>
+                        <span id="total_items">1</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Opções do programa -->
         <footer>
             <input id="check_opitions" type="checkbox">
             <ul id="opitions_section" onclick="closeDock()">

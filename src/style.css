@@ -83,19 +83,20 @@ div#add_edit_pane div.content div.header div input {
 
 
 
-main {
-    margin-bottom: 3rem;
-}
-
 /* Área principal do programa */
 main {
+    margin-bottom: 3rem;
     width: 100%;
     padding: 2rem;
 }
 
+main div#list_div {
+    display: none;
+}
+
 /* Caso a lista esteja vazia */
 main header {
-    display: none;
+    /* display: none; */
     color: var(--light-gray1);
     text-align: center;
 }

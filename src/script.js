@@ -29,6 +29,8 @@ if ( getlocalStorage == null ) {
     
 }
 
+let edit = false;
+
 
 
 // Elementos da página
@@ -93,7 +95,17 @@ opitionsList.onclick = () => {
 
 
 
-function openAddEditPane () { addEdditPane.style.display = ""; }
+function openAddEditPane ( editFunction = false ) {
+
+    addEdditPane.style.display = "";
+
+    if( editFunction !== false ) {
+
+        edit = editFunction;
+
+    }
+
+}
 
 function closeAddEditPane ( readInputs ) {
 
@@ -104,11 +116,25 @@ function closeAddEditPane ( readInputs ) {
 
         if ( verify ) {
 
-            listArr.push( new Item(
-                verify[0],
-                verify[1],
-                verify[2]
-            ) );
+            if ( edit !== false ) {
+
+                listArr[ edit ] = new Item(
+                    verify[ 0 ],
+                    verify[ 1 ],
+                    verify[ 2 ],
+                );
+
+                edit = false;
+
+            } else {
+
+                listArr.push( new Item(
+                    verify[ 0 ],
+                    verify[ 1 ],
+                    verify[ 2 ]
+                ) );
+
+            }
 
             // Salva as alterações no armazenamento local
             localStorage.setItem( "shopping", JSON.stringify( listArr ) );
@@ -163,6 +189,14 @@ function clearList () {
 
 
 
+function remove ( key ) {
+
+    listArr.splice( key, 1 );
+    localStorage.setItem( "shopping", JSON.stringify( listArr ) );
+    loadList();
+
+}
+
 function loadList () {
 
     mainList.innerHTML = "";
@@ -182,7 +216,7 @@ function loadList () {
         listDiv.style.display = "block";
 
 
-        listArr.forEach( e => {
+        listArr.forEach( ( e,k ) => {
 
             let itemTag = `<li>
                 <div class="content">
@@ -196,8 +230,8 @@ function loadList () {
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="remove_item">Remover</button>
-                    <button class="edit_item">Editar</button>
+                    <button class="remove_item" onclick="remove(${ k })">Remover</button>
+                    <button class="edit_item" onclick="openAddEditPane(${ k })">Editar</button>
                 </div>
             </li>`
 

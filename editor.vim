@@ -8,13 +8,13 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +51 src/script.js
-badd +30 src/index.html
-badd +34 src/style.css
+badd +158 src/script.js
+badd +83 src/index.html
+badd +99 src/style.css
 argglobal
 %argdel
 $argadd src/script.js
-edit src/index.html
+edit src/script.js
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -41,6 +41,29 @@ exe 'vert 2resize ' . ((&columns * 89 + 90) / 180)
 exe '3resize ' . ((&lines * 13 + 19) / 38)
 exe 'vert 3resize ' . ((&columns * 89 + 90) / 180)
 argglobal
+balt src/style.css
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 158 - ((25 * winheight(0) + 18) / 36)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 158
+normal! 014|
+wincmd w
+argglobal
+if bufexists("src/index.html") | buffer src/index.html | else | edit src/index.html | endif
+if &buftype ==# 'terminal'
+  silent file src/index.html
+endif
 balt src/script.js
 setlocal fdm=manual
 setlocal fde=0
@@ -52,12 +75,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 37 - ((14 * winheight(0) + 18) / 36)
+let s:l = 83 - ((12 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 37
-normal! 055|
+keepjumps 83
+normal! 040|
 wincmd w
 argglobal
 if bufexists("src/style.css") | buffer src/style.css | else | edit src/style.css | endif
@@ -75,35 +98,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 45 - ((10 * winheight(0) + 11) / 22)
+let s:l = 99 - ((6 * winheight(0) + 6) / 13)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 45
+keepjumps 99
 normal! 0
-wincmd w
-argglobal
-if bufexists("src/script.js") | buffer src/script.js | else | edit src/script.js | endif
-if &buftype ==# 'terminal'
-  silent file src/script.js
-endif
-balt src/index.html
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 21 - ((6 * winheight(0) + 6) / 13)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 21
-normal! 09|
 wincmd w
 exe 'vert 1resize ' . ((&columns * 90 + 90) / 180)
 exe '2resize ' . ((&lines * 22 + 19) / 38)
